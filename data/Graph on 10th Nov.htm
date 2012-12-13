@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0096)file:///C:/Users/bloopink/Documents/projects/flot/flot-flot-f0e78fc/hobbit-graph/testhobbit.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+ 	<title> The Hobbit Movie Likes in Facebook </title>
+ 	 <link href="./Graph on 10th Nov_files/layout.css" rel="stylesheet" type="text/css">
+ 	<script language="javascript" type="text/javascript" src="./Graph on 10th Nov_files/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="./Graph on 10th Nov_files/jquery.flot.js"></script>
+     <script language="javascript" type="text/javascript" src="./Graph on 10th Nov_files/jquery.flot.axislabels.js"></script>
+ </head>
+    <body>
+    <h2>The Hobbit Movie Likes in Facebook </h2>
+
+    <div id="placeholder" style="width: 1000px; height: 500px; padding: 0px; position: relative;"><canvas class="base" width="1000" height="500"></canvas><canvas class="overlay" width="1000" height="500" style="position: absolute; left: 0px; top: 0px;"></canvas><div class="tickLabels" style="font-size:smaller"><div class="xAxis x1Axis" style="color:#545454"><div class="tickLabel" style="position:absolute;text-align:center;left:83px;top:464px;width:100px">23:00</div><div class="tickLabel" style="position:absolute;text-align:center;left:204px;top:464px;width:100px">0:00</div><div class="tickLabel" style="position:absolute;text-align:center;left:324px;top:464px;width:100px">1:00</div><div class="tickLabel" style="position:absolute;text-align:center;left:444px;top:464px;width:100px">2:00</div><div class="tickLabel" style="position:absolute;text-align:center;left:565px;top:464px;width:100px">3:00</div><div class="tickLabel" style="position:absolute;text-align:center;left:685px;top:464px;width:100px">4:00</div><div class="tickLabel" style="position:absolute;text-align:center;left:805px;top:464px;width:100px">5:00</div><div class="tickLabel" style="position:absolute;text-align:center;left:926px;top:464px;width:100px">6:00</div></div><div class="yAxis y1Axis" style="color:#545454"><div class="tickLabel" style="position:absolute;text-align:right;top:449px;right:938px;width:62px">885000</div><div class="tickLabel" style="position:absolute;text-align:right;top:358px;right:938px;width:62px">890000</div><div class="tickLabel" style="position:absolute;text-align:right;top:268px;right:938px;width:62px">895000</div><div class="tickLabel" style="position:absolute;text-align:right;top:177px;right:938px;width:62px">900000</div><div class="tickLabel" style="position:absolute;text-align:right;top:87px;right:938px;width:62px">905000</div><div class="tickLabel" style="position:absolute;text-align:right;top:-4px;right:938px;width:62px">910000</div></div></div></div>
+    <div id="usergraph" style="width:1000px;height:500px;"></div>
+    <script type="text/javascript">
+    
+
+
+
+    $(function () {
+    	var points = [], updateInterval = 2000, plot;
+    	var url = "https://graph.facebook.com/TheHobbitMovie";
+    	function fetchAndPlot() {
+	    	$.getJSON(url, function(data){
+	    		points.push([$.now(), data.likes]);
+	    		plotPoints();    	
+	    	});
+		}		    	
+
+		
+		var options = { 
+			xaxis: 	  { 	
+				mode: "time", 
+				axisLabel: 'Time',
+           		axisLabelUseCanvas: true,
+	            axisLabelFontSizePixels: 20,
+	            axisLabelFontFamily: 'Arial'
+            },
+            yaxis: 	  {
+            	axisLabel: 'Likes',
+            	axisLabelUseCanvas: true,
+            	axisLabelFontSizePixels: 20,
+	            axisLabelFontFamily: 'Arial'
+            }
+			
+        };
+    	function plotPoints() {
+    		$.plot($("#placeholder"), [points], options);
+    	}
+
+    	
+    	/*function plotUserPoints (beg, end) {
+    		
+    		var userOptions = { 
+				xaxis: 	  { 	
+					mode: "time", 
+					label: "Time",
+					min: beg,
+					max: end
+	            },
+	            yaxis: 	  {
+	            	label: "Likes"
+	            }
+			};
+
+    		$.plot($("#usergraph"), [points], userOptions);
+    	
+    	}*/
+		
+		fetchAndPlot();
+    	setInterval(fetchAndPlot, updateInterval);
+    	
+
+	});
+	</script>
+	
+
+		
+
+
+
+    
+
+</body></html>

@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+ 	<title> The Hobbit Movie Likes in Facebook </title>
+ 	 <link href="layout.css" rel="stylesheet" type="text/css">
+ 	<script language="javascript" type="text/javascript" src="jquery/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="jquery/jquery.flot.js"></script>
+ </head>
+    <body>
+    <!--<h2>The Hobbit Movie Likes in Facebook </h2>-->
+    <img src="images/poster3.jpg" style="float: left;"> </img>
+    <div id="graphcontainer">
+    	<div class="heading" >
+    		<p> THE RISE OF THE HOBBIT </p>
+    	</div>
+    	<div class="desc"> The graph depicts the popularity of The Hobbit Movie on facebook</div>
+    	<div>
+	    	<img class="yaxisLabelPic" src="images/likeIcon.jpg"> </img>
+    	</div>
+    	<div id="placeholder">
+    	</div>
+    	<div>
+    		<p id="xaxisLabel"> Time </p>
+    		<img src="images/rightarrow.png" class="xaxisArrow" > </img>
+    	</div>
+	</div>
+    <!--<div id="usergraph" style="width:1000px;height:500px;"></div> -->
+    <script type="text/javascript">
+    
+
+
+
+    $(function () {
+    	var points = [], updateInterval = 2000, plot, counter = 0, printInterval = 1000;
+    	var url = "https://graph.facebook.com/TheHobbitMovie";
+    	function fetchAndPlot() {
+	    	$.getJSON(url, function(data){
+	    		points.push([$.now(), data.likes]);
+	    		plotPoints();    	
+	    	});
+		}		    	
+
+		
+		var options = { 
+			xaxis: 	  { 	
+				mode: "time"
+            }
+			
+        };
+    	function plotPoints() {
+    		$.plot($("#placeholder"), [points], options);
+    	}
+
+    	function printPoints() {
+    		for(var i=counter; i<points.length; i++)
+    			console.log("[" + [points[i][0], points[i][1]] + " ],");
+    		counter = points.length;
+
+    	}
+
+    	
+    	/*function plotUserPoints (beg, end) {
+    		
+    		var userOptions = { 
+				xaxis: 	  { 	
+					mode: "time", 
+					label: "Time",
+					min: beg,
+					max: end
+	            },
+	            yaxis: 	  {
+	            	label: "Likes"
+	            }
+			};
+
+    		$.plot($("#usergraph"), [points], userOptions);
+
+    		/*Points to focus on:
+			1. Limit on y axis
+			2. Hover on graph for values
+			3. Optimize code using plot.draw()
+			
+    
+    	
+    	}*/
+		
+		fetchAndPlot();
+    	setInterval(fetchAndPlot, updateInterval);
+    	setInterval(printPoints, printInterval);
+    	
+
+	});
+	</script>
+	</body>
+</html>
+
+

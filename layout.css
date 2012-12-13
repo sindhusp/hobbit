@@ -1,0 +1,71 @@
+body {
+  font-family: sans-serif;
+  font-size: 16px;
+  margin: 50px;
+  color: white;
+  width: auto;
+  background-color: black;
+}
+
+#graphcontainer {
+  position: absolute ;
+  left: 470px;
+  width: 800px;
+  height: 600px;
+  background-color: black;
+}
+
+.desc {
+  font: 'Arial';
+  size: 10px;
+  color: gray;
+  text-align: center;
+  position: relative;
+  top:10px;
+
+}
+
+#placeholder {
+
+  position: relative;
+  top: 10px;
+  left: 20px;
+	width: 700px;
+	height: 500px;
+}
+
+.heading{
+  font: 'Arial';
+  color: yellow ;
+  letter-spacing: 2px; 
+  text-align: center;
+  size: 60px;
+  width:auto;
+  position: relative;
+  left: -5px;
+  
+}
+
+#xaxisLabel {
+  color: white;
+  font-size: 15px;
+  text-align: center;
+}
+
+img.xaxisArrow {
+  height: 20px;
+  width: 40px;
+  position: relative;
+  top: -30px;
+  left: 430px;
+}
+
+img.yaxisLabelPic {
+  
+  position: absolute;
+  left: -10px;
+  top: 450px;
+  height:60px;
+  width: 25px;
+}
+

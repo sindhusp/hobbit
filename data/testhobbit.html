@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+ 	<title> The Hobbit Movie Likes in Facebook </title>
+ 	 <link href="layout.css" rel="stylesheet" type="text/css">
+ 	<script language="javascript" type="text/javascript" src="../jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="../jquery.flot.js"></script>
+     <script language="javascript" type="text/javascript" src="../jquery.flot.axislabels.js"></script>
+ </head>
+    <body>
+    <h2>The Hobbit Movie Likes in Facebook </h2>
+
+    <div id="placeholder" style="width:1000px;height:500px;"></div>
+    <div id="usergraph" style="width:1000px;height:500px;"></div>
+    <script type="text/javascript">
+    
+
+
+
+    $(function () {
+    	var points = [], updateInterval = 2000, plot;
+    	var url = "https://graph.facebook.com/TheHobbitMovie";
+    	function fetchAndPlot() {
+	    	$.getJSON(url, function(data){
+	    		points.push([$.now(), data.likes]);
+	    		plotPoints();    	
+	    	});
+		}		    	
+
+		
+		var options = { 
+			xaxis: 	  { 	
+				mode: "time", 
+				axisLabel: 'Time',
+           		axisLabelUseCanvas: true,
+	            axisLabelFontSizePixels: 20,
+	            axisLabelFontFamily: 'Arial'
+            },
+            yaxis: 	  {
+            	axisLabel: 'Likes',
+            	axisLabelUseCanvas: true,
+            	axisLabelFontSizePixels: 20,
+	            axisLabelFontFamily: 'Arial'
+            }
+			
+        };
+    	function plotPoints() {
+    		$.plot($("#placeholder"), [points], options);
+    	}
+
+    	
+    	/*function plotUserPoints (beg, end) {
+    		
+    		var userOptions = { 
+				xaxis: 	  { 	
+					mode: "time", 
+					label: "Time",
+					min: beg,
+					max: end
+	            },
+	            yaxis: 	  {
+	            	label: "Likes"
+	            }
+			};
+
+    		$.plot($("#usergraph"), [points], userOptions);
+    	
+    	}*/
+		
+		fetchAndPlot();
+    	setInterval(fetchAndPlot, updateInterval);
+    	
+
+	});
+	</script>
+	</body>
+</html>
+		
+
+
+
+    
+
